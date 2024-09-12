@@ -23,7 +23,6 @@ builder.Services.AddMediatR(typeof(Program));
 builder.Services.AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Program>());
 builder.Services.AddSingleton<IInMemoryCoverageCacheService, MemoryCoverageCacheService>();
 builder.Services.AddScoped<IInsuranceService, InsuranceService>();
-
 builder.Services.AddScoped<IInsuranceRepository, InsuranceRepository>();
 var app = builder.Build();
 
