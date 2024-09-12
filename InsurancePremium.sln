@@ -5,23 +5,13 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PremiumAccountService", "PremiumAccountService", "{9F2BF79F-144D-4642-9187-12D7D4DCC23F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumAccountService.Domain", "PremiumAccountService.Domain\PremiumAccountService.Domain.csproj", "{3AE768E6-6CC3-4352-B5CA-7540F68CF01A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PremiumAccountService.Domain", "PremiumAccountService.Domain\PremiumAccountService.Domain.csproj", "{3AE768E6-6CC3-4352-B5CA-7540F68CF01A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumAccountService.Application", "PremiumAccountService.Application\PremiumAccountService.Application.csproj", "{37506FBD-DF4B-45D9-8A2F-D125AD31B2DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PremiumAccountService.Application", "PremiumAccountService.Application\PremiumAccountService.Application.csproj", "{37506FBD-DF4B-45D9-8A2F-D125AD31B2DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumAccountService.Infrastructure", "PremiumAccountService.Infrastructure\PremiumAccountService.Infrastructure.csproj", "{6D6465F5-FEC7-47BB-90D5-010AFCD962C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PremiumAccountService.Infrastructure", "PremiumAccountService.Infrastructure\PremiumAccountService.Infrastructure.csproj", "{6D6465F5-FEC7-47BB-90D5-010AFCD962C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumAccountService.Api", "PremiumAccountService.Api\PremiumAccountService.Api.csproj", "{41E443F9-E8BD-4CB3-8FD0-B03E6451AFDB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RequestManagementService", "RequestManagementService", "{8903C599-E0DA-4BA0-A6E2-6DC3BF7D2755}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestManagementService.Domain", "RequestManagementService.Domain\RequestManagementService.Domain.csproj", "{FAAC8EDB-E857-4D8E-BCE7-E0DD1D653F66}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestManagementService.Application", "RequestManagementService.Application\RequestManagementService.Application.csproj", "{D7E5F1A4-2FFF-48D2-8BB7-64359F37816D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestManagementService.Infrastructure", "RequestManagementService.Infrastructure\RequestManagementService.Infrastructure.csproj", "{4ECBA97C-B1EF-4AF3-B31F-E412AEC71F4F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestManagementService.Api", "RequestManagementService.Api\RequestManagementService.Api.csproj", "{992F688A-78CF-4CB9-A887-2D538F5A4931}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PremiumAccountService.Api", "PremiumAccountService.Api\PremiumAccountService.Api.csproj", "{41E443F9-E8BD-4CB3-8FD0-B03E6451AFDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,22 +35,6 @@ Global
 		{41E443F9-E8BD-4CB3-8FD0-B03E6451AFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41E443F9-E8BD-4CB3-8FD0-B03E6451AFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41E443F9-E8BD-4CB3-8FD0-B03E6451AFDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAAC8EDB-E857-4D8E-BCE7-E0DD1D653F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FAAC8EDB-E857-4D8E-BCE7-E0DD1D653F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAAC8EDB-E857-4D8E-BCE7-E0DD1D653F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FAAC8EDB-E857-4D8E-BCE7-E0DD1D653F66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7E5F1A4-2FFF-48D2-8BB7-64359F37816D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7E5F1A4-2FFF-48D2-8BB7-64359F37816D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7E5F1A4-2FFF-48D2-8BB7-64359F37816D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7E5F1A4-2FFF-48D2-8BB7-64359F37816D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4ECBA97C-B1EF-4AF3-B31F-E412AEC71F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4ECBA97C-B1EF-4AF3-B31F-E412AEC71F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4ECBA97C-B1EF-4AF3-B31F-E412AEC71F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4ECBA97C-B1EF-4AF3-B31F-E412AEC71F4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{992F688A-78CF-4CB9-A887-2D538F5A4931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{992F688A-78CF-4CB9-A887-2D538F5A4931}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{992F688A-78CF-4CB9-A887-2D538F5A4931}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{992F688A-78CF-4CB9-A887-2D538F5A4931}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,10 +44,6 @@ Global
 		{37506FBD-DF4B-45D9-8A2F-D125AD31B2DD} = {9F2BF79F-144D-4642-9187-12D7D4DCC23F}
 		{6D6465F5-FEC7-47BB-90D5-010AFCD962C3} = {9F2BF79F-144D-4642-9187-12D7D4DCC23F}
 		{41E443F9-E8BD-4CB3-8FD0-B03E6451AFDB} = {9F2BF79F-144D-4642-9187-12D7D4DCC23F}
-		{FAAC8EDB-E857-4D8E-BCE7-E0DD1D653F66} = {8903C599-E0DA-4BA0-A6E2-6DC3BF7D2755}
-		{D7E5F1A4-2FFF-48D2-8BB7-64359F37816D} = {8903C599-E0DA-4BA0-A6E2-6DC3BF7D2755}
-		{4ECBA97C-B1EF-4AF3-B31F-E412AEC71F4F} = {8903C599-E0DA-4BA0-A6E2-6DC3BF7D2755}
-		{992F688A-78CF-4CB9-A887-2D538F5A4931} = {8903C599-E0DA-4BA0-A6E2-6DC3BF7D2755}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F5FD724-E77F-4CDA-B94C-00A1370DD4F9}

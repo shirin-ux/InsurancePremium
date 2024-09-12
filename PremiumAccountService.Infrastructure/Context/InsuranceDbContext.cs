@@ -3,13 +3,14 @@ using PremiumAccountService.Domain.Entities;
 
 namespace PremiumAccountService.Infrastructure.Context
 {
-    public class PremiumDbContext : DbContext
+    public class InsuranceDbContext : DbContext
     {
-        public PremiumDbContext(DbContextOptions<PremiumDbContext> options) : base(options)
+        public InsuranceDbContext(DbContextOptions<InsuranceDbContext> options) : base(options)
         {
 
         }
         public DbSet<Coverage> coverages { get; set; }
+        public DbSet<InsuranceRequest> InsuranceRequests { get; set; }
     }
 
 }
