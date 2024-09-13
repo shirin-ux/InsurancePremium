@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using PremiumAccountService.Application.Commands;
 using PremiumAccountService.Application.IInsuranceServices;
 using PremiumAccountService.Application.IRepository;
 using PremiumAccountService.Domain.IInMemoryCacheService;
@@ -14,16 +15,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddControllers();
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<InsuranceDbContext>(option => option.UseSqlServer(connectionString));
-builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddControllers();
+builder.Services.AddMediatR(typeof(CreateInsuranceRequestCommand).Assembly);
 builder.Services.AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Program>());
-builder.Services.AddSingleton<IInMemoryCoverageCacheService, MemoryCoverageCacheService>();
-builder.Services.AddScoped<IInsuranceService, InsuranceService>();
-builder.Services.AddScoped<IInsuranceRepository, InsuranceRepository>();
+builder.Services.AddSingleton(typeof(IInMemoryCoverageCacheService), typeof(MemoryCoverageCacheService));
+builder.Services.AddScoped(typeof(IInsuranceService), typeof(InsuranceService));
+builder.Services.AddScoped(typeof(IInsuranceRepository), typeof(InsuranceRepository)); 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

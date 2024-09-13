@@ -1,16 +1,20 @@
-﻿namespace PremiumAccountService.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PremiumAccountService.Domain.Entities
 {
     public class InsuranceRequest
     {
         public InsuranceRequest()
         {
-            Coverages = new List<Coverage>();
+            RequestCoverages = new List<InsuranceRequestCoverage>();
         }
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<Coverage> Coverages { get; set; }
+        public virtual ICollection<InsuranceRequestCoverage> RequestCoverages { get; set; }
+
+        [Column(TypeName = "decimal(18,0)")]
         public decimal Amount { get; set; }
-        public decimal TotalPremium { get; set; }
+
         
     }
 }

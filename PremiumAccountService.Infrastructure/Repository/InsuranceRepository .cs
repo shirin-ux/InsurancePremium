@@ -5,35 +5,23 @@ using PremiumAccountService.Infrastructure.Context;
 
 namespace PremiumAccountService.Infrastructure.InsuranceRepository
 {
-    public class InsuranceRepository() : IInsuranceRepository
+    public class InsuranceRepository : IInsuranceRepository
     {
 
         private readonly InsuranceDbContext _context;
-
+        public InsuranceRepository(InsuranceDbContext context)
+        {
+            _context = context;
+        }
         public async Task AddInsuranceRequest(InsuranceRequest insuranceRequest)
         {
-
             _context.AddAsync(insuranceRequest);
             await _context.SaveChangesAsync();
         }
 
         public async Task<List<InsuranceRequest>> GetAllInsuranceRequests()
         {
-            return await _context.InsuranceRequests.Select(x => new InsuranceRequest
-            {
-                Amount = x.Amount,
-               TotalPremium=x.TotalPremium,
-                Title = x.Title,
-                Coverages = x.Coverages.Select(c => new Coverage
-                {
-                    Id = c.Id,
-                    PremiumRate=c.PremiumRate,
-                    MaxAmount=c.MaxAmount,
-                    MinAmount=c.MinAmount,
-                    InsuranceRequestId=c.InsuranceRequestId,
-                    Type = c.Type
-                }).ToList()
-            }).ToListAsync();
+            return await _context.InsuranceRequests.Include(x=>x.RequestCoverages).ThenInclude(c=>c.Coverage).ToListAsync();
         }
 
         public async Task<List<Coverage>> GetCoverages() => await _context.coverages.ToListAsync();

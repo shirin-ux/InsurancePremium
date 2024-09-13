@@ -13,7 +13,8 @@ namespace PremiumAccountService.Application.Commands
     {
         public string Title { get; set; }
         public List<CoverageDto> Coverages { get; set; }
-        public decimal Amount { get; set; }
+       public decimal Amount { get; set; }
+      //  public List<InsuranceRequestCoverageDto> RequestCoverage { get; set; } 
     }
 
 }

@@ -13,5 +13,6 @@ namespace PremiumAccountService.Application.IRepository
         Task AddInsuranceRequest(InsuranceRequest insuranceRequest);
         Task<List<Coverage>> GetCoverages();
         Task<List<InsuranceRequest>> GetAllInsuranceRequests();
+       
     }
 }

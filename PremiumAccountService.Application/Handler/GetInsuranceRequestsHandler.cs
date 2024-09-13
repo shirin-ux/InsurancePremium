@@ -13,15 +13,16 @@ using System.Threading.Tasks;
 
 namespace PremiumAccountService.Application.Handler
 {
-    public class GetInsuranceRequestsHandler(IInsuranceService insuranceService) : 
-        IRequestHandler<GetInsuranceRequestsQuery, List<InsuranceRequestDto>>
+    public class GetInsuranceRequestsHandler : IRequestHandler<GetInsuranceRequestsQuery, List<InsuranceRequestDto>>
     {
         private readonly IInsuranceService _insuranceService;
+        public GetInsuranceRequestsHandler(IInsuranceService insuranceService)
+        {
+            _insuranceService = insuranceService;   
+        }
         public async Task<List<InsuranceRequestDto>> Handle(GetInsuranceRequestsQuery request, CancellationToken cancellationToken)
         {
             return await _insuranceService.GetAllInsuranceRequests();
         }
-
-       
     }
 }

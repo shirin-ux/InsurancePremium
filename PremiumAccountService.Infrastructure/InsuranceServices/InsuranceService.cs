@@ -1,16 +1,9 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PremiumAccountService.Application.DTO;
 using PremiumAccountService.Application.IInsuranceServices;
 using PremiumAccountService.Application.IRepository;
 using PremiumAccountService.Domain.Entities;
 using PremiumAccountService.Domain.IInMemoryCacheService;
-using PremiumAccountService.Infrastructure.InMemoryCacheService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PremiumAccountService.Infrastructure.InsuranceServices
 {
@@ -21,30 +14,41 @@ namespace PremiumAccountService.Infrastructure.InsuranceServices
 
         public async Task<decimal> AddInsuranceRequest(InsuranceRequestDto request)
         {
-            decimal totalPremium = 0;
-            foreach (var coverageRequest in request.Coverages)
-            {
-                totalPremium += await CalculatePremiumAsync(coverageRequest.Type, coverageRequest.PremiumRate);
-            }
-
-            var insuranceRequest = new InsuranceRequest
+            var insuranceRequest = new InsuranceRequestDto
             {
                 Title = request.Title,
-                Coverages = request.Coverages.Select(c => new Coverage
-                {
-                    Type = c.Type,
-                    MinAmount = c.MinAmount,
-                    MaxAmount = c.MaxAmount,
-                    PremiumRate = c.PremiumRate
-                }).ToList(),
-                Amount = request.Coverages.Sum(c => c.PremiumRate),
-                TotalPremium = totalPremium
+                RequestCoverage = new List<InsuranceRequestCoverageDto>(),
+                Amount=request.Amount,
+                Coverage=new List<CoverageDto>()
             };
-            await _insuranceRepository.AddInsuranceRequest(insuranceRequest);
+            decimal totalPremium = 0;
+
+            foreach (var coverage in request.Coverage)
+            {
+                totalPremium += await CalculatePremiumAsync(coverage.Type, request.Amount);
+                var requestCoverage = new InsuranceRequestCoverageDto
+                {
+                    Type = coverage.Type,
+                    CoverageId = await GetCoverageById(coverage.Type), 
+                    PaymentAmount = totalPremium
+                };
+                insuranceRequest.RequestCoverage.Add(requestCoverage);
+
+            }
+            await _insuranceRepository.AddInsuranceRequest(new InsuranceRequest
+            {
+                Title = insuranceRequest.Title,
+                RequestCoverages = insuranceRequest.RequestCoverage.Select(x => new InsuranceRequestCoverage
+                {
+                    CoverageId = x.CoverageId,
+                    PayementAmount =x.PaymentAmount
+                }).ToList(),
+                Amount=insuranceRequest.Amount
+            });
             return totalPremium;
         }
 
-        public async Task<decimal> CalculatePremiumAsync(short typeCoverage, decimal amount)
+        public async Task<decimal> CalculatePremiumAsync(int typeCoverage, decimal amount)
         {
             var coverages = await GetCoverage();
             var coverage = coverages.Where(c => c.Type == typeCoverage).FirstOrDefault();
@@ -54,9 +58,15 @@ namespace PremiumAccountService.Infrastructure.InsuranceServices
                 throw new ArgumentException("پوشش نامشخص");
             }
 
-            if (amount < coverage.MinAmount || amount > coverage.MaxAmount)
+            if (amount < coverage.MinAmount )
             {
-                throw new ArgumentException("مقدار وارد شده در محدوده مجاز نیست");
+                
+                return 0;
+            }
+            if ( amount > coverage.MaxAmount)
+            {
+                amount = coverage.MaxAmount;
+                
             }
             return amount * coverage.PremiumRate;
         }
@@ -64,11 +74,17 @@ namespace PremiumAccountService.Infrastructure.InsuranceServices
         public async Task<List<InsuranceRequestDto>> GetAllInsuranceRequests()
         {
             var response = await _insuranceRepository.GetAllInsuranceRequests();
-            return response.Select(x=>new InsuranceRequestDto
+            return response.Select(x => new InsuranceRequestDto
             {
+                RequestCoverage = x.RequestCoverages.Select(c => new InsuranceRequestCoverageDto
+                {
+                    Type = c.Coverage.Type,
+                     CoverageId=c.CoverageId,
+                     PaymentAmount=c.PayementAmount,
+                }).ToList(),
                 Amount=x.Amount,
-                Premium=x.TotalPremium,
-                Title=x.Title
+             
+                Title = x.Title
             }).ToList();
         }
 
@@ -82,6 +98,12 @@ namespace PremiumAccountService.Infrastructure.InsuranceServices
             var coverages = await _insuranceRepository.GetCoverages();
             await _memoryCoverageCacheService.SetAllCovergeAsync(coverages);
             return coverages;
+        }
+        private async Task<int> GetCoverageById(int typeCoverage)
+        {
+            var coverages = await GetCoverage();
+            var coverageId = coverages.Where(c => c.Type == typeCoverage).FirstOrDefault().Id;
+            return coverageId;
         }
 
     }

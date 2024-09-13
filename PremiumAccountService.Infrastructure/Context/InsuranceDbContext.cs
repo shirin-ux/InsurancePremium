@@ -11,6 +11,7 @@ namespace PremiumAccountService.Infrastructure.Context
         }
         public DbSet<Coverage> coverages { get; set; }
         public DbSet<InsuranceRequest> InsuranceRequests { get; set; }
+        public DbSet<InsuranceRequestCoverage> InsuranceRequestCoverages { get; set; }
     }
 
 }

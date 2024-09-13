@@ -9,10 +9,9 @@ namespace PremiumAccountService.Application.DTO
 {
     public class InsuranceRequestDto
     {
-        public int Id { get; set; }
         public string Title { get; set; }
-        public List<CoverageDto> Coverages { get; set; }
         public decimal Amount { get; set; }
-        public decimal Premium { get; set; }
+        public List<InsuranceRequestCoverageDto> RequestCoverage { get; set; } = new List<InsuranceRequestCoverageDto>();
+        public List<CoverageDto> Coverage { get; set; } = new List<CoverageDto>();
     }
 }
