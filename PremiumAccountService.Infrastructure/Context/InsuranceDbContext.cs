@@ -21,7 +21,7 @@ namespace PremiumAccountService.Infrastructure.Context
             new Coverage
             {
                 Id = 1,
-                Type = "جراحی",
+                Type = 1,
                 PremiumRate  = 0.0052,
                 MinAmount = 5000,
                 MaxAmount = 50000000
@@ -29,7 +29,7 @@ namespace PremiumAccountService.Infrastructure.Context
             new Coverage
             {
                 Id = 2,
-                Type = "دندانپزشکی",
+                Type = 2,
                 PremiumRate  = 0.0042,
                 MinAmount = 4000,
                 MaxAmount = 40000000
@@ -37,7 +37,7 @@ namespace PremiumAccountService.Infrastructure.Context
             new Coverage
             {
                 Id = 3,
-                Type = "بستری",
+                Type = 3,
                 PremiumRate  = 0.005,
                 MinAmount = 2000,
                 MaxAmount = 20000000
